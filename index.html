@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <title>A Letter For You - By Xian</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+    <div id="start-screen">
+        <button class="heart-btn" onclick="openLetter()">💌</button>
+        <div class="instruction">Click the envelope, gelacutiee<3</div>
+    </div>
+
+    <div id="letter-container">
+        <div id="letter-content"></div>
+        <div class="signature" id="signature">- Your Lovers, Xian</div>
+    </div>
+
+<audio id="bg-music" src="song.mp3" loop></audio>
+
+
+    <script>
+        // JAVASCRIPT LOGIC
+
+        // 1. CONFIGURATION: Edit your message here!
+        const message = `Hi Love,
+Gusto ko lang talagang magpasalamat sa’yo sa lahat. Hindi mo siguro alam kung gaano kalaki ang naging impact mo sa buhay ko. Ikaw ang reason kung bakit mas pinupush ko ang sarili ko to become a better version of myself not because kailangan mo, but because you inspire me to do better every single day.
+
+Thank you kasi palagi kang nandiyan. Thank you sa mga simpleng usapan natin, sa mga tawa, sa mga kwento, at kahit sa mga tahimik na moments na magkausap lang tayo. You became my comfort without even trying. Para kang lucky charm ko, kasi simula nung dumating ka, parang mas gumaan lahat at mas naging meaningful yung mga araw ko.
+
+Nakakatawa isipin na pumasok ang taon na totally strangers tayo. Wala tayong idea na magkakausap tayo ng ganito, na magiging ganito tayo ka-close. What a plot twist, right? From random conversations to something I genuinely treasure. Hindi man natin alam kung saan tayo dadalhin nito, pero ang alam ko, thankful ako na naging part ako ng timeline ng buhay mo.
+
+And honestly, I wouldn’t trade this for anything. I appreciate you more than words can explain.
+
+I love you, Nikka <3; Thank you for love. I care about you so much. ❤️ <3`;
+
+        // 2. LOGIC
+        const startScreen = document.getElementById('start-screen');
+        const letterContainer = document.getElementById('letter-container');
+        const letterContent = document.getElementById('letter-content');
+        const signature = document.getElementById('signature');
+
+        // Function to start the experience
+        function openLetter() {
+            startScreen.style.opacity = '0';
+            setTimeout(() => {
+                startScreen.style.display = 'none';
+                letterContainer.style.transform = 'scale(1)';
+        startHeartRain();
+        typeWriter();
+        document.getElementById('bg-music').play();
+    }, 1000);
+        }
+
+        // Typewriter Effect
+        let i = 0;
+        const speed = 90; // Speed in milliseconds
+
+        function typeWriter() {
+            if (i < message.length) {
+                letterContent.innerHTML += message.charAt(i);
+                i++;
+                setTimeout(typeWriter, speed);
+            } else {
+                // Show signature after typing finishes
+                signature.style.opacity = '1';
+            }
+        }
+
+        // Falling Hearts Background Effect
+        function startHeartRain() {
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.classList.add('floating-heart');
+                heart.innerHTML = '❤';
+                
+                // Randomize position and size
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.fontSize = Math.random() * 20 + 10 + 'px';
+                heart.style.animationDuration = Math.random() * 3 + 2 + 's'; // 2s to 5s
+                
+                document.body.appendChild(heart);
+
+                // Remove heart from DOM after animation ends to prevent lag
+                setTimeout(() => {
+                    heart.remove();
+                }, 5000);
+            }, 300);
+        }
+    </script>
+</body>
+</html>
